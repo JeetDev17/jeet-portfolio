@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeet Mistry - AR/VR & Unity Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #050714;
+            --card: rgba(15, 23, 42, 0.75);
+            --glass: rgba(15, 23, 42, 0.65);
+            --teal: #06b6d4;
+            --violet: #7c3aed;
+            --pink: #ec4899;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, rgba(15, 118, 110, 0.25), transparent 50%),
+                        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.18), transparent 40%),
+                        var(--bg);
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .aurora {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.25), transparent 45%),
+                        radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.18), transparent 35%),
+                        radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.2), transparent 40%);
+            filter: blur(60px);
+            opacity: 0.8;
+            z-index: 0;
+            animation: aurora-shift 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes aurora-shift {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(-4%, 3%, 0) scale(1.1); }
+        }
+
+        .project-card-link:hover .project-icon {
+            transform: scale(1.12) rotate(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .glass-panel {
+            background: var(--glass);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 20px 45px rgba(2, 6, 23, 0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(120deg, var(--teal), var(--violet), var(--pink));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .media-frame {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 24px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-frame img {
+            width: 100%;
+            border-radius: 18px;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(2, 6, 23, 0.4);
+        }
+
+        .project-video {
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(2, 6, 23, 0.4);
+            object-fit: cover;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .project-video.portrait {
+            max-width: 320px;
+            aspect-ratio: 9 / 16;
+            height: auto;
+        }
+
+        .project-video.force-landscape {
+            aspect-ratio: 16 / 9;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .project-video:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 55px rgba(6, 182, 212, 0.25);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse-ring::after {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border: 2px solid rgba(14, 165, 233, 0.25);
+            border-radius: 28px;
+            animation: pulse 3s infinite;
+        }
+        .pulse-ring {
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0; transform: scale(0.95); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.15); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--teal), var(--violet));
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative">
+    <div class="aurora" aria-hidden="true"></div>
+
+    <!-- Header/Navbar -->
+    <header class="p-5 md:p-6 flex justify-between items-center glass-panel rounded-3xl mx-4 md:mx-10 mt-6 sticky top-4 z-50 border border-white/5">
+        <div class="flex items-center space-x-3">
+            <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Jeet Mistry</h1>
+        </div>
+        <nav>
+            <ul class="flex space-x-4 md:space-x-8 text-base md:text-lg font-medium">
+                <li><a href="#about" class="hover:text-teal-300 transition-colors">About</a></li>
+                <li><a href="#focus" class="hover:text-teal-300 transition-colors">Focus</a></li>
+                <li><a href="#projects" class="hover:text-teal-300 transition-colors">Projects</a></li>
+                <li><a href="#contact" class="hover:text-teal-300 transition-colors">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow relative z-10">
+        <!-- Hero Section -->
+        <section class="relative py-24 md:py-32 px-5 md:px-10" id="hero">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 text-center lg:text-left reveal">
+                    <p class="uppercase tracking-[0.35em] text-sm text-slate-400">AR · VR · Real-time 3D</p>
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+                        Crafting <span class="gradient-text">immersive</span> experiences that feel alive.
+                    </h2>
+                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                        I'm a Unity specialist building spatial products that merge artistry, storytelling, and systems thinking. From enterprise digital twins to playful VR experiments, my work focuses on precision, performance, and emotion.
+                    </p>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-center lg:justify-start">
+                        <a href="#projects" class="relative inline-flex items-center justify-center px-7 py-3 text-lg font-semibold text-white bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 rounded-full shadow-[0_20px_45px_rgba(59,130,246,0.35)] hover:scale-[1.02] transition-transform">
+                            View Work
+                        </a>
+                        <a href="#contact" class="text-lg font-semibold text-slate-200 hover:text-white transition-colors flex items-center gap-2">
+                            Let's Collaborate
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 text-left max-w-xl mx-auto lg:mx-0">
+                        <div class="glass-panel rounded-2xl p-4 border border-white/5">
+                            <p class="text-3xl font-bold text-white">40+</p>
+                            <p class="text-sm text-slate-400">XR Releases</p>
+                        </div>
+                        <div class="glass-panel rounded-2xl p-4 border border-white/5">
+                            <p class="text-3xl font-bold text-white">6</p>
+                            <p class="text-sm text-slate-400">Platforms</p>
+                        </div>
+                        <div class="glass-panel rounded-2xl p-4 border border-white/5">
+                            <p class="text-3xl font-bold text-white">∞</p>
+                            <p class="text-sm text-slate-400">Ideas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative reveal">
+                    <div class="absolute -top-12 -right-8 w-32 h-32 bg-cyan-500/20 blur-3xl rounded-full"></div>
+                    <div class="absolute -bottom-16 -left-10 w-40 h-40 bg-violet-600/20 blur-3xl rounded-full"></div>
+                    <div class="glass-panel rounded-3xl border border-white/10 p-6 md:p-8 relative overflow-hidden pulse-ring">
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-violet-600/10 pointer-events-none"></div>
+                        <p class="text-xs uppercase tracking-[0.45em] text-slate-400 mb-6">Realtime Engine</p>
+                        <h3 class="text-2xl font-bold text-white mb-4">Unity Lead · AR/VR</h3>
+                        <p class="text-slate-300 mb-6">Prototyping, shading, interactions, and pipeline automation for spatial computing products.</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
+                                <p class="text-slate-400">Stacks</p>
+                                <p class="font-semibold text-white">Unity, MRTK, URP, DOTS</p>
+                            </div>
+                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
+                                <p class="text-slate-400">Tooling</p>
+                                <p class="font-semibold text-white">Vuforia, ARKit, ARCore</p>
+                            </div>
+                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
+                                <p class="text-slate-400">Platforms</p>
+                                <p class="font-semibold text-white">Quest, Vision Pro, HoloLens</p>
+                            </div>
+                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
+                                <p class="text-slate-400">Focus</p>
+                                <p class="font-semibold text-white">Immersion, performance</p>
+                            </div>
+                        </div>
+                        <div class="absolute right-4 top-4 w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section class="py-16 md:py-20 px-5 md:px-10" id="about">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-start">
+                <div class="glass-panel rounded-3xl p-8 space-y-6 reveal">
+                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">Profile</p>
+                    <h3 class="text-3xl md:text-4xl font-bold">Spatial computing architect blending code with narrative.</h3>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        My background spans educational AR toolkits, enterprise VR simulations, and experimental mixed reality experiences. I obsess over interaction details, performance budgets, and designing systems that scale from prototype to production.
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        I collaborate closely with designers, artists, and hardware teams to ensure each build feels tuned for the device it's shipping on. Every pixel, shader, and gesture is intentional.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">Unity Lead</span>
+                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">XR Prototyper</span>
+                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">Realtime Rendering</span>
+                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">Systems Thinking</span>
+                    </div>
+                </div>
+                <div class="space-y-6 reveal">
+                    <!-- <div class="glass-panel rounded-3xl p-6 border border-white/5">
+                        <p class="text-sm uppercase tracking-[0.35em] text-slate-400 mb-4">Expertise Scorecard</p>
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between text-sm text-slate-400 mb-1"><span>XR Interaction Design</span><span>9/10</span></div>
+                                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-teal-400 to-cyan-500 rounded-full" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm text-slate-400 mb-1"><span>Rendering & Shaders</span><span>8/10</span></div>
+                                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-400 to-violet-500 rounded-full" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm text-slate-400 mb-1"><span>Systems Engineering</span><span>9/10</span></div>
+                                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="glass-panel rounded-3xl p-6 border border-white/5">
+                        <p class="text-sm uppercase tracking-[0.35em] text-slate-400 mb-4">Recent Highlights</p>
+                        <ul class="space-y-4 text-slate-200">
+                            <li class="flex items-start gap-3">
+                                <span class="text-teal-300 mt-1">▹</span>
+                                Led a digital twin deployment monitoring 120+ factory endpoints in real time.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-teal-300 mt-1">▹</span>
+                                Built a markerless AR demo for automotive visualization under 6 weeks.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-teal-300 mt-1">▹</span>
+                                Shipped a HoloLens 2 experience with multimodal hand & voice interactions.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus Areas -->
+        <section class="py-16 md:py-20 px-5 md:px-10" id="focus">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center reveal">
+                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">What I deliver</p>
+                    <h3 class="text-3xl md:text-4xl font-bold mt-4">High-impact immersive systems.</h3>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 reveal">
+                    <div class="glass-panel rounded-3xl p-6 border border-white/5 hover:-translate-y-1 transition-transform">
+                        <div class="text-3xl mb-4">🧠</div>
+                        <h4 class="text-xl font-semibold mb-3">Rapid Prototyping</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">Proof-of-concept builds that validate ideas fast with clean architecture ready for scale.</p>
+                    </div>
+                    <div class="glass-panel rounded-3xl p-6 border border-white/5 hover:-translate-y-1 transition-transform">
+                        <div class="text-3xl mb-4">🎨</div>
+                        <h4 class="text-xl font-semibold mb-3">Interaction Design</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">Human-centered mechanics, gesture systems, and tactile feedback that feel intuitive.</p>
+                    </div>
+                    <div class="glass-panel rounded-3xl p-6 border border-white/5 hover:-translate-y-1 transition-transform">
+                        <div class="text-3xl mb-4">🚀</div>
+                        <h4 class="text-xl font-semibold mb-3">Production Shipping</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">Optimization, profiling, and release engineering across mobile, desktop, and MR headsets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Dynamic Content) -->
+        <section class="py-20 md:py-24 px-5 md:px-10 relative" id="projects">
+            <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center reveal">
+                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">Selected Work</p>
+                    <h3 class="text-3xl md:text-4xl font-bold mt-4">Modular XR portfolio</h3>
+                    <p class="text-slate-300 mt-3 max-w-2xl mx-auto">Explore AR/VR, game, digital twin, and mixed reality builds. Drill down into each category and preview highlights, media, and narrative.</p>
+                </div>
+                <!-- Container for dynamic content (Categories or Project List) -->
+                <div id="project-content" class="min-h-[500px] flex justify-center items-start w-full reveal">
+                    <p class="text-slate-400">Loading projects...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-20 md:py-24 px-5 md:px-10" id="contact">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-panel rounded-3xl p-8 space-y-8 reveal">
+                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">Connect</p>
+                    <h3 class="text-3xl md:text-4xl font-bold">Let's build something immersive together.</h3>
+                    <p class="text-lg text-slate-300">I'm open to collaborations, consulting, or joining ambitious teams. Drop a line—I'll reply within 24 hours.</p>
+                    <div class="space-y-4">
+                        <a href="mailto:jeetvmistry@gmail.com" class="block w-full text-center text-lg font-semibold text-white bg-gradient-to-r from-teal-400 to-cyan-500 py-3 rounded-2xl hover:shadow-[0_20px_45px_rgba(6,182,212,0.3)] transition-shadow">
+                        Email Me
+                    </a>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://www.linkedin.com/in/jeet-mistry-495094153/" target="_blank" class="flex-1 border border-white/10 rounded-2xl py-3 text-center hover:border-white/30 transition-colors">LinkedIn</a>
+                            <a href="https://github.com/yourprofile" target="_blank" class="flex-1 border border-white/10 rounded-2xl py-3 text-center hover:border-white/30 transition-colors">GitHub</a>
+                        </div>
+                        <a href="tel:+918511347110" class="inline-flex items-center gap-2 text-slate-200 hover:text-white transition-colors">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            +91 8511347110
+                        </a>
+                    </div>
+                    <!-- <div class="grid sm:grid-cols-3 gap-4 pt-4 border-t border-white/5 text-center">
+                        <div class="rounded-2xl bg-white/5 p-4">
+                            <p class="text-xs uppercase tracking-[0.35em] text-slate-400 mb-1">Response</p>
+                            <p class="text-xl font-semibold text-white">24h</p>
+                        </div>
+                        <div class="rounded-2xl bg-white/5 p-4">
+                            <p class="text-xs uppercase tracking-[0.35em] text-slate-400 mb-1">Timezone</p>
+                            <p class="text-base font-semibold text-white">IST · GMT+1/EST overlap</p>
+                        </div>
+                        <div class="rounded-2xl bg-white/5 p-4">
+                            <p class="text-xs uppercase tracking-[0.35em] text-slate-400 mb-1">Focus</p>
+                            <p class="text-base font-semibold text-white">XR · Spatial</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-6 text-center text-slate-500 text-sm">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Jeet Mistry · Built with Unity mindset.</p>
+    </footer>
+
+    <!-- JavaScript for Project Management -->
+    <script>
+        // Define all project data, structured by category
+        const projectData = {
+            'AR': {
+                title: "Augmented Reality Projects",
+                icon: "💡",
+                projects: [
+                    { 
+                        id: 1, 
+                        name: "Marker Based Educational AR", 
+                        description: "Developed an Educational AR application for Mechanical Design students utilizing the Unity Engine and Vuforia SDK by PTC (Image Targets). The solution transforms complex 2D CAD drawings into interactive 3D models. Key features include animated exploded views, color-coded view-switching (Plan, Section, LHS, RHS), and component isolation (active component solid, others transparent) for detailed inspection. This tool, delivered as a 45-page AR Workbook, significantly enhances spatial reasoning and visualization.", 
+                        media: [
+                            { type: 'video', url: "videos/AR_Final_Video.mp4", forceLandscape: true }
+                        ],
+                        link: "#" 
+                    },
+                    { 
+                        id: 2, 
+                        name: "MarkerLess Based AR", 
+                        description: "Created a markerless AR experience using horizontal and vertical plane detection (ARCore/ARKit) allowing users to place large-scale virtual objects, such as architectural models, into their environment.", 
+                        media: [
+                            { type: 'video', url: "videos/Markerless.mp4" }
+                        ],
+                        link: "#" 
+                    },
+                    // { 
+                    //     id: 3, 
+                    //     name: "For Product Visualisation", 
+                    //     description: "Built a commercial application for product visualization, enabling customers to preview products in real-time at scale before purchase, significantly boosting sales engagement.", 
+                    //     media: [
+                    //         { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Product+AR+Default" }
+                    //     ],
+                    //     link: "#" 
+                    // },
+                    { 
+                        id: 4, 
+                        name: "Spatial AR Office Navigator", 
+                        description: `🧭 Spatial AR Office Navigator is a geo-localized information layer that transforms a physical office into an immersive, data-rich experience.<br><br><strong>Project Overview:</strong> I delivered an end-to-end Unity/AR Foundation mobile build (APK) that anchors persistent content to the real space, enabling on-site navigation and instant access to operational insights.<br><br><strong>Key Highlights</strong><br><strong>Immersion & Persistence:</strong> Utilized SLAM and geo-anchoring to maintain perfectly aligned overlays regardless of device or time of day.<br><br><strong>Contextual Intelligence:</strong> Real-time mobile scanning reveals contextual POIs (Admin Desk, Rewards Wall, Daily Update Board, Manager Office) the moment users point their device.<br><br><strong>End-to-End Development:</strong> Implemented spatial data capture, feature recognition, and rendering pipelines for the final mixed reality layer.<br><br><strong>Demonstrated Skills:</strong> Spatial computing, persistent AR systems, and practical, utility-focused mixed reality design.`,
+                        media: [
+                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Location+AR+Default" }
+                        ],
+                        link: "#" 
+                    },
+                    { 
+                        id: 5, 
+                        name: "Drone AR for visualisation", 
+                        description: "Designed an AR visualization tool that overlays flight paths, telemetry data, and maintenance guides onto the live camera feed of a drone's environment.", 
+                        media: [
+                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Drone+AR+Default" }
+                        ],
+                        link: "#" 
+                    },
+                ]
+            },
+            'VR': {
+                title: "Virtual Reality Projects",
+                icon: "🎧",
+                projects: [
+                    { 
+                        id: 6, 
+                        name: "VR Training Simulator", 
+                        description: "A high-fidelity VR simulator for industrial safety training, focusing on emergency protocols and equipment handling in a zero-risk environment (Unity/Oculus).", 
+                        media: [
+                            { type: 'video', url: "videos/Room_VR.mp4" }
+                        ],
+                        link: "#" 
+                    },
+                    { 
+                        id: 7, 
+                        name: "VR Game Prototype (Unity)", 
+                        description: "Developed a combat-focused VR game prototype, demonstrating proficiency in physics interactions, locomotion, and complex C# game logic for immersive combat.", 
+                        media: [
+                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=VR+Game+Default" }
+                        ],
+                        link: "#" 
+                    },
+                ]
+            },
+            'Games': {
+                title: "Game Development (Unity)",
+                icon: "🎮",
+                projects: [
+                    { 
+                        id: 8, 
+                        name: "Mobile Puzzle Game", 
+                        description: "A casual 2D mobile puzzle game released on Android, focusing on optimizing performance and implementing user retention loops using Unity UI.", 
+                        media: [
+                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Mobile+Game+Default" }
+                        ],
+                        link: "#" 
+                    },
+                    { 
+                        id: 9, 
+                        name: "PC Strategy Game", 
+                        description: "Contributed to a PC strategy game project, specifically developing the resource management and AI pathfinding systems using C# and ECS.", 
+                        media: [
+                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=PC+Strategy+Default" }
+                        ],
+                        link: "#" 
+                    },
+                ]
+            },
+            'DigitalTwin': {
+                title: "Digital Twin Solutions",
+                icon: "🏢",
+                projects: [
+                    { 
+                        id: 10, 
+                        name: "Factory Floor Monitoring DT", 
+                        description: "Created a real-time digital twin of a factory floor for remote monitoring of machinery health and production efficiency using IoT data integration and Unity 3D.", 
+                        media: [
+                            { type: 'video', url: "videos/digital-twin.MP4" }
+                        ],
+                        link: "#" 
+                    },
+                ]
+            },
+            'HoloLens': {
+                title: "HoloLens Mixed Reality",
+                icon: "👓",
+                projects: [
+                    { 
+                        id: 11, 
+                        name: "Interactive Mixed Reality Experience", 
+                        description: "Developed a high-fidelity Mixed Reality experience for HoloLens 2 using Unity 2020.3.28f1 and the Microsoft Mixed Reality Toolkit (MRTK) via the OpenXR Plugin. The application features a fully immersive environment utilizing Spatial Mapping to anchor holograms to the real world. I implemented a multimodal interaction system including precise Hand Tracking (NearInteractionGrabbable, ObjectManipulator) for grabbing/manipulating 3D assets, and a SpeechInputHandler for hands-free Voice Commands (e.g., 'Toggle Lights', 'Explode Model') to trigger complex animations. The project was built for UWP (ARM64) and optimized using Holographic Remoting for rapid iteration.", 
+                        media: [
+                            { type: 'video', url: "videos/HoloLens.mp4" }
+                        ],
+                        link: "#" 
+                    },
+                ]
+            }
+        };
+
+        const projectContent = document.getElementById('project-content');
+
+        /**
+         * Renders the main category selection menu (Level 1).
+         */
+        function renderCategoryMenu() {
+            let html = `
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full max-w-6xl">
+            `;
+
+            Object.keys(projectData).forEach(key => {
+                const category = projectData[key];
+                html += `
+                    <button class="project-card-link bg-slate-800 hover:bg-slate-700 transition-all duration-300 rounded-xl shadow-xl p-6 flex flex-col items-center text-center focus:outline-none focus:ring-4 focus:ring-teal-500/50" onclick="renderProjectDetails('${key}')">
+                        <span class="project-icon text-5xl mb-3 transition-transform duration-300">${category.icon}</span>
+                        <h4 class="text-xl font-semibold text-white">${category.title}</h4>
+                    </button>
+                `;
+            });
+
+            html += `</div>`;
+            projectContent.innerHTML = html;
+        }
+
+        /**
+         * Renders the detailed list of projects for a selected category (Level 2).
+         * Each project is a button leading to the single project view.
+         * @param {string} categoryKey - The key of the selected category (e.g., 'AR').
+         */
+        function renderProjectDetails(categoryKey) {
+            const category = projectData[categoryKey];
+            if (!category) {
+                projectContent.innerHTML = `<p class="text-red-500">Category not found.</p>`;
+                return;
+            }
+
+            let html = `
+                <div class="w-full max-w-5xl">
+                    <button onclick="renderCategoryMenu()" class="text-teal-400 hover:text-teal-300 mb-8 flex items-center transition-colors">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Categories
+                    </button>
+                    <h4 class="text-3xl font-bold text-white mb-10 border-b border-teal-500 pb-3">${category.title}</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+            `;
+
+            category.projects.forEach(project => {
+                html += `
+                    <button onclick="renderSingleProject('${categoryKey}', ${project.id})" class="text-left bg-slate-800 hover:bg-slate-700 transition-all duration-300 rounded-xl shadow-xl p-6 focus:outline-none focus:ring-4 focus:ring-teal-500/50 h-full flex flex-col">
+                        <h5 class="text-xl font-semibold text-teal-400 mb-2">${project.name}</h5>
+                        <p class="text-sm text-slate-400 flex-grow">${project.description.substring(0, 150).trim()}...</p>
+                        <p class="text-xs mt-3 text-slate-500 self-end">View Media and Description →</p>
+                    </button>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+            projectContent.innerHTML = html;
+        }
+
+        /**
+         * Renders the detailed view for a single project (Level 3).
+         * @param {string} categoryKey - The key of the selected category.
+         * @param {number} projectId - The ID of the project.
+         */
+        function renderSingleProject(categoryKey, projectId) {
+            const category = projectData[categoryKey];
+            const project = category.projects.find(p => p.id === projectId);
+            if (!project) {
+                projectContent.innerHTML = `<p class="text-red-500">Project not found.</p>`;
+                return;
+            }
+
+            let mediaGallery = '';
+            if (project.media && project.media.length > 0) {
+                mediaGallery += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                project.media.forEach(mediaItem => {
+                    if (mediaItem.type === 'image') {
+                        mediaGallery += `
+                            <div class="media-frame">
+                                <img src="${mediaItem.url}" alt="Visual for ${project.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x250/374151/f9fafb?text=Visual+Unavailable';" />
+                            </div>
+                        `;
+                    } else if (mediaItem.type === 'video') {
+                        const landscapeClass = mediaItem.forceLandscape ? 'force-landscape' : '';
+                        const forceAttr = mediaItem.forceLandscape ? 'data-force="landscape"' : '';
+                        mediaGallery += `
+                            <div class="media-frame">
+                                <video src="${mediaItem.url}" controls autoplay loop muted playsinline preload="metadata" class="project-video ${landscapeClass}" ${forceAttr}>
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        `;
+                    }
+                });
+                mediaGallery += `</div>`;
+            } else {
+                mediaGallery = `<div class="min-h-[200px] bg-slate-700/50 rounded-lg flex items-center justify-center p-4 text-slate-400">No media available for this project.</div>`;
+            }
+
+            let html = `
+                <div class="w-full max-w-5xl">
+                    <button onclick="renderProjectDetails('${categoryKey}')" class="text-teal-400 hover:text-teal-300 mb-8 flex items-center transition-colors">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to ${category.title} Projects
+                    </button>
+                    
+                    <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8 space-y-8">
+                        <h4 class="text-3xl font-bold text-teal-400 border-b border-slate-700 pb-4">${project.name}</h4>
+                        
+                        <!-- Media Gallery Section -->
+                        <div>
+                            <h5 class="text-xl font-semibold text-white mb-3">Project Media</h5>
+                            ${mediaGallery}
+                        </div>
+
+                        <!-- Description Section -->
+                        <div>
+                            <h5 class="text-xl font-semibold text-white mb-3">Project Description</h5>
+                            <p class="text-base text-slate-300 leading-relaxed">${project.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            projectContent.innerHTML = html;
+            enhanceProjectVideos();
+        }
+
+        /**
+         * Sets up reveal-on-scroll animations using Intersection Observer.
+         */
+        function setupRevealAnimations() {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.2 }
+            );
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        /**
+         * Adds a subtle parallax effect to floating hero cards.
+         */
+        function setupParallaxCard() {
+            const card = document.querySelector('.pulse-ring');
+            if (!card) return;
+
+            card.addEventListener('mousemove', (event) => {
+                const bounds = card.getBoundingClientRect();
+                const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+                const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+                card.style.transform = `rotateY(${x * 8}deg) rotateX(${ -y * 8}deg) translateZ(0)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        }
+
+        /**
+         * Ensures project videos adapt their layout based on actual orientation.
+         */
+        function enhanceProjectVideos() {
+            const videos = projectContent.querySelectorAll('video.project-video');
+            videos.forEach(video => {
+                if (video.dataset.force === 'landscape') {
+                    return;
+                }
+
+                const setOrientation = () => {
+                    const isPortrait = video.videoWidth && video.videoHeight
+                        ? video.videoWidth < video.videoHeight
+                        : false;
+                    video.classList.toggle('portrait', isPortrait);
+                };
+
+                if (video.readyState > 0) {
+                    setOrientation();
+                } else {
+                    video.addEventListener('loadedmetadata', setOrientation, { once: true });
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategoryMenu();
+            setupRevealAnimations();
+            setupParallaxCard();
+        });
+    </script>
+</body>
+</html>

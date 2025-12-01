@@ -1,0 +1,18 @@
+VR Real Estate Prototype
+
+Key Features and Technical Highlights (Updated)
+Comprehensive VR Locomotion Systems: Implementation of multiple user movement options, including smooth Locomotion for traditional navigation and Teleportation for comfortable, rapid traversal across large floor plans, demonstrating a focus on user comfort and accessibility.
+
+Dynamic Lighting & Environment Control: Implementation of a precise Light Toggle system, allowing users to switch room illumination on and off, demonstrating real-time lighting changes and environmental control.
+
+Advanced UI/UX Interaction: Simulated Television Interaction with Remote, including channel switching or menu navigation, showcasing complex object-to-object and UI-to-world communication.
+
+Physics-Based Object Manipulation: 3D Object Grabs and Interaction using VR controllers, demonstrating accurate inverse kinematics and physics calculations for object pickup, placement, and throwing.
+
+Real-Time Reflection Rendering: Integration of a performant Mirror Reflection system, adding significant visual fidelity and reinforcing the sense of presence in the virtual space.
+
+Utility & Power Interaction: Functional Socket Interactor system, allowing users to plug and unplug virtual devices, simulating real-world utility engagement.
+
+Integrated Time Simulation: Implementation of a Real-Time Clock visible within the environment, showcasing integration with system time or internal virtual time systems.
+
+Complex Physics Simulation: Demonstration of realistic projectile and impact dynamics using Cricket Ball Physics (or similar detailed sport/object physics) to test collision and restitution properties within the environment.

@@ -1,0 +1,18 @@
+Mixed Reality (MR) HoloLens 2 Application
+Project Summary: High-Fidelity MR for Industrial Visualization
+This project represents a high-fidelity Mixed Reality application designed specifically for the HoloLens 2, blending virtual models seamlessly into the user's real-world environment. Utilizing the full capabilities of Spatial Computing, the application provides a hands-on, intuitive way to interact with complex 3D data. The core focus was developing a robust, multimodal interaction system that allows users to seamlessly control holograms using both precise hand gestures and efficient, hands-free voice commands.
+
+Key Features & Technical Highlights
+Platform & SDK Integration: Developed using Unity (2020.3.28f1) and the Microsoft Mixed Reality Toolkit (MRTK) via the modern OpenXR Plugin for optimal performance and cross-platform readiness on the HoloLens 2.
+
+Real-World Integration (Spatial Mapping): Implemented Spatial Mapping to accurately recognize and map the physical environment, allowing holograms to be anchored and interact realistically with floors, walls, and real-world surfaces.
+
+Multimodal Interaction System (Hand & Voice):
+
+Precise Hand Tracking: Utilized MRTK components like NearInteractionGrabbable and ObjectManipulator to enable users to physically grab, scale, rotate, and manipulate 3D assets with intuitive hand gestures.
+
+Hands-Free Voice Commands: Integrated the SpeechInputHandler to execute complex actions (e.g., 'Toggle Lights', 'Explode Model') via voice, streamlining workflows and providing a critical hands-free control option.
+
+Complex Feature Triggering: Designed and scripted the voice command system to specifically trigger complex animations within the 3D models (e.g., an exploded view of a machine), demonstrating advanced data visualization capabilities.
+
+Deployment & Optimization: Built the final application for UWP (ARM64) deployment. Workflow was streamlined using Holographic Remoting for rapid testing, iteration, and debugging directly from the Unity Editor to the HoloLens device.

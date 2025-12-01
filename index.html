@@ -156,23 +156,231 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+
+        /* Responsive Design Enhancements */
+        @media (max-width: 640px) {
+            .media-frame {
+                padding: 0.75rem;
+                border-radius: 16px;
+            }
+
+            .project-video.portrait {
+                max-width: 100%;
+                aspect-ratio: 9 / 16;
+            }
+
+            .glass-panel {
+                border-radius: 20px;
+            }
+
+            header {
+                padding: 1rem;
+                margin: 0.75rem;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 1.25rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-video {
+                max-height: 50vh;
+            }
+
+            .media-frame {
+                padding: 0.5rem;
+            }
+
+            section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .project-video {
+                max-height: 60vh;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu-button {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+                background: transparent;
+                border: none;
+                color: #e2e8f0;
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        nav {
+            position: relative;
+        }
+
+        nav ul {
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul.mobile-open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            left: auto;
+            min-width: 200px;
+            max-width: 280px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 20px;
+            padding: 0.5rem 0;
+            margin: 0;
+            box-shadow: 0 20px 45px rgba(2, 6, 23, 0.45);
+            z-index: 100;
+            list-style: none;
+            align-items: stretch;
+        }
+
+            nav ul.mobile-open li {
+                margin: 0;
+                padding: 0;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+                width: 100%;
+                display: flex;
+            }
+
+            nav ul.mobile-open li:last-child {
+                border-bottom: none;
+            }
+
+            nav ul.mobile-open li a {
+                width: 100%;
+                padding: 1rem 1.25rem;
+                text-align: left;
+                display: block;
+                color: #e2e8f0;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                border-radius: 0;
+            }
+
+            nav ul.mobile-open li a:hover,
+            nav ul.mobile-open li a:active {
+                background: rgba(148, 163, 184, 0.1);
+                color: #06b6d4;
+            }
+
+            nav ul.mobile-open li:first-child a {
+                border-radius: 20px 20px 0 0;
+            }
+
+            nav ul.mobile-open li:last-child a {
+                border-radius: 0 0 20px 20px;
+            }
+        }
+
+        /* Touch-friendly targets */
+        @media (hover: none) and (pointer: coarse) {
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Video responsiveness */
+        .project-video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 480px) {
+            .project-video.portrait {
+                max-width: 280px;
+            }
+
+            .grid {
+                gap: 0.75rem;
+            }
+        }
+
+        /* Text readability on small screens */
+        @media (max-width: 640px) {
+            body {
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            h3 {
+                font-size: 1.75rem;
+            }
+
+            p {
+                font-size: 0.9375rem;
+                line-height: 1.6;
+            }
+        }
+
+        /* Prevent horizontal scroll */
+        * {
+            max-width: 100%;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen relative">
     <div class="aurora" aria-hidden="true"></div>
 
     <!-- Header/Navbar -->
-    <header class="p-5 md:p-6 flex justify-between items-center glass-panel rounded-3xl mx-4 md:mx-10 mt-6 sticky top-4 z-50 border border-white/5">
-        <div class="flex items-center space-x-3">
-            <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Jeet Mistry</h1>
+    <header class="p-4 sm:p-5 md:p-6 flex justify-between items-center glass-panel rounded-2xl sm:rounded-3xl mx-2 sm:mx-4 md:mx-10 mt-4 sm:mt-6 sticky top-2 sm:top-4 z-50 border border-white/5 relative">
+        <div class="flex items-center space-x-2 sm:space-x-3">
+            <span class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">Jeet Mistry</h1>
         </div>
-        <nav>
-            <ul class="flex space-x-4 md:space-x-8 text-base md:text-lg font-medium">
-                <li><a href="#about" class="hover:text-teal-300 transition-colors">About</a></li>
-                <li><a href="#focus" class="hover:text-teal-300 transition-colors">Focus</a></li>
-                <li><a href="#projects" class="hover:text-teal-300 transition-colors">Projects</a></li>
-                <li><a href="#contact" class="hover:text-teal-300 transition-colors">Contact</a></li>
+        <nav class="relative">
+            <button class="mobile-menu-button" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <ul id="nav-menu" class="hidden md:flex space-x-4 md:space-x-8 text-sm sm:text-base md:text-lg font-medium list-none">
+                <li class="list-none"><a href="#about" class="hover:text-teal-300 transition-colors py-2 block" onclick="closeMobileMenu()">About</a></li>
+                <li class="list-none"><a href="#focus" class="hover:text-teal-300 transition-colors py-2 block" onclick="closeMobileMenu()">Focus</a></li>
+                <li class="list-none"><a href="#projects" class="hover:text-teal-300 transition-colors py-2 block" onclick="closeMobileMenu()">Projects</a></li>
+                <li class="list-none"><a href="#contact" class="hover:text-teal-300 transition-colors py-2 block" onclick="closeMobileMenu()">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -180,129 +388,106 @@
     <!-- Main Content -->
     <main class="flex-grow relative z-10">
         <!-- Hero Section -->
-        <section class="relative py-24 md:py-32 px-5 md:px-10" id="hero">
-            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8 text-center lg:text-left reveal">
-                    <p class="uppercase tracking-[0.35em] text-sm text-slate-400">AR · VR · Real-time 3D</p>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+        <section class="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-5 md:px-10" id="hero">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+                <div class="space-y-6 sm:space-y-8 text-center lg:text-left reveal">
+                    <p class="uppercase tracking-[0.25em] sm:tracking-[0.35em] text-xs sm:text-sm text-slate-400">AR · VR · Real-time 3D</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
                         Crafting <span class="gradient-text">immersive</span> experiences that feel alive.
                     </h2>
-                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                    <p class="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                         I'm a Unity specialist building spatial products that merge artistry, storytelling, and systems thinking. From enterprise digital twins to playful VR experiments, my work focuses on precision, performance, and emotion.
                     </p>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 justify-center lg:justify-start">
-                        <a href="#projects" class="relative inline-flex items-center justify-center px-7 py-3 text-lg font-semibold text-white bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 rounded-full shadow-[0_20px_45px_rgba(59,130,246,0.35)] hover:scale-[1.02] transition-transform">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 lg:gap-6 justify-center lg:justify-start">
+                        <a href="#projects" class="relative inline-flex items-center justify-center px-6 sm:px-7 py-2.5 sm:py-3 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 rounded-full shadow-[0_20px_45px_rgba(59,130,246,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-transform">
                             View Work
                         </a>
-                        <a href="#contact" class="text-lg font-semibold text-slate-200 hover:text-white transition-colors flex items-center gap-2">
+                        <a href="#contact" class="text-base sm:text-lg font-semibold text-slate-200 hover:text-white transition-colors flex items-center justify-center gap-2">
                             Let's Collaborate
                             <span aria-hidden="true">↗</span>
                         </a>
                     </div>
-                    <div class="grid grid-cols-3 gap-4 text-left max-w-xl mx-auto lg:mx-0">
-                        <div class="glass-panel rounded-2xl p-4 border border-white/5">
-                            <p class="text-3xl font-bold text-white">40+</p>
-                            <p class="text-sm text-slate-400">XR Releases</p>
+                    <div class="grid grid-cols-3 gap-2 sm:gap-4 text-left max-w-xl mx-auto lg:mx-0">
+                        <div class="glass-panel rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/5">
+                            <p class="text-2xl sm:text-3xl font-bold text-white">40+</p>
+                            <p class="text-xs sm:text-sm text-slate-400">XR Releases</p>
                         </div>
-                        <div class="glass-panel rounded-2xl p-4 border border-white/5">
-                            <p class="text-3xl font-bold text-white">6</p>
-                            <p class="text-sm text-slate-400">Platforms</p>
+                        <div class="glass-panel rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/5">
+                            <p class="text-2xl sm:text-3xl font-bold text-white">6</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Platforms</p>
                         </div>
-                        <div class="glass-panel rounded-2xl p-4 border border-white/5">
-                            <p class="text-3xl font-bold text-white">∞</p>
-                            <p class="text-sm text-slate-400">Ideas</p>
+                        <div class="glass-panel rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/5">
+                            <p class="text-2xl sm:text-3xl font-bold text-white">∞</p>
+                            <p class="text-xs sm:text-sm text-slate-400">Ideas</p>
                         </div>
                     </div>
                 </div>
-                <div class="relative reveal">
-                    <div class="absolute -top-12 -right-8 w-32 h-32 bg-cyan-500/20 blur-3xl rounded-full"></div>
-                    <div class="absolute -bottom-16 -left-10 w-40 h-40 bg-violet-600/20 blur-3xl rounded-full"></div>
-                    <div class="glass-panel rounded-3xl border border-white/10 p-6 md:p-8 relative overflow-hidden pulse-ring">
+                <div class="relative reveal mt-8 lg:mt-0">
+                    <div class="absolute -top-8 sm:-top-12 -right-6 sm:-right-8 w-24 h-24 sm:w-32 sm:h-32 bg-cyan-500/20 blur-3xl rounded-full"></div>
+                    <div class="absolute -bottom-12 sm:-bottom-16 -left-6 sm:-left-10 w-32 h-32 sm:w-40 sm:h-40 bg-violet-600/20 blur-3xl rounded-full"></div>
+                    <div class="glass-panel rounded-2xl sm:rounded-3xl border border-white/10 p-5 sm:p-6 md:p-8 relative overflow-hidden pulse-ring">
                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-violet-600/10 pointer-events-none"></div>
-                        <p class="text-xs uppercase tracking-[0.45em] text-slate-400 mb-6">Realtime Engine</p>
-                        <h3 class="text-2xl font-bold text-white mb-4">Unity Lead · AR/VR</h3>
-                        <p class="text-slate-300 mb-6">Prototyping, shading, interactions, and pipeline automation for spatial computing products.</p>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
-                                <p class="text-slate-400">Stacks</p>
-                                <p class="font-semibold text-white">Unity, MRTK, URP, DOTS</p>
+                        <p class="text-xs uppercase tracking-[0.35em] sm:tracking-[0.45em] text-slate-400 mb-4 sm:mb-6">Realtime Engine</p>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Unity Lead · AR/VR</h3>
+                        <p class="text-sm sm:text-base text-slate-300 mb-4 sm:mb-6">Prototyping, shading, interactions, and pipeline automation for spatial computing products.</p>
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
+                            <div class="rounded-xl sm:rounded-2xl bg-slate-900/60 border border-white/5 p-3 sm:p-4">
+                                <p class="text-slate-400 mb-1">Stacks</p>
+                                <p class="font-semibold text-white leading-tight">Unity, MRTK, URP, DOTS</p>
                             </div>
-                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
-                                <p class="text-slate-400">Tooling</p>
-                                <p class="font-semibold text-white">Vuforia, ARKit, ARCore</p>
+                            <div class="rounded-xl sm:rounded-2xl bg-slate-900/60 border border-white/5 p-3 sm:p-4">
+                                <p class="text-slate-400 mb-1">Tooling</p>
+                                <p class="font-semibold text-white leading-tight">Vuforia, ARKit, ARCore</p>
                             </div>
-                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
-                                <p class="text-slate-400">Platforms</p>
-                                <p class="font-semibold text-white">Quest, Vision Pro, HoloLens</p>
+                            <div class="rounded-xl sm:rounded-2xl bg-slate-900/60 border border-white/5 p-3 sm:p-4">
+                                <p class="text-slate-400 mb-1">Platforms</p>
+                                <p class="font-semibold text-white leading-tight">Quest, Vision Pro, HoloLens</p>
                             </div>
-                            <div class="rounded-2xl bg-slate-900/60 border border-white/5 p-4">
-                                <p class="text-slate-400">Focus</p>
-                                <p class="font-semibold text-white">Immersion, performance</p>
+                            <div class="rounded-xl sm:rounded-2xl bg-slate-900/60 border border-white/5 p-3 sm:p-4">
+                                <p class="text-slate-400 mb-1">Focus</p>
+                                <p class="font-semibold text-white leading-tight">Immersion, performance</p>
                             </div>
                         </div>
-                        <div class="absolute right-4 top-4 w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <div class="absolute right-3 sm:right-4 top-3 sm:top-4 w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- About Me Section -->
-        <section class="py-16 md:py-20 px-5 md:px-10" id="about">
-            <div class="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-start">
-                <div class="glass-panel rounded-3xl p-8 space-y-6 reveal">
-                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">Profile</p>
-                    <h3 class="text-3xl md:text-4xl font-bold">Spatial computing architect blending code with narrative.</h3>
-                    <p class="text-lg text-slate-300 leading-relaxed">
+        <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-5 md:px-10" id="about">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-8 sm:gap-12 items-start">
+                <div class="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-4 sm:space-y-6 reveal">
+                    <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400">Profile</p>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold">Spatial computing architect blending code with narrative.</h3>
+                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
                         My background spans educational AR toolkits, enterprise VR simulations, and experimental mixed reality experiences. I obsess over interaction details, performance budgets, and designing systems that scale from prototype to production.
                     </p>
-                    <p class="text-lg text-slate-300 leading-relaxed">
+                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
                         I collaborate closely with designers, artists, and hardware teams to ensure each build feels tuned for the device it's shipping on. Every pixel, shader, and gesture is intentional.
                     </p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">Unity Lead</span>
-                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">XR Prototyper</span>
-                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">Realtime Rendering</span>
-                        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm tracking-wide">Systems Thinking</span>
+                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm tracking-wide">Unity Lead</span>
+                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm tracking-wide">XR Prototyper</span>
+                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm tracking-wide">Realtime Rendering</span>
+                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm tracking-wide">Systems Thinking</span>
                     </div>
                 </div>
-                <div class="space-y-6 reveal">
-                    <!-- <div class="glass-panel rounded-3xl p-6 border border-white/5">
-                        <p class="text-sm uppercase tracking-[0.35em] text-slate-400 mb-4">Expertise Scorecard</p>
-                        <div class="space-y-5">
-                            <div>
-                                <div class="flex justify-between text-sm text-slate-400 mb-1"><span>XR Interaction Design</span><span>9/10</span></div>
-                                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-teal-400 to-cyan-500 rounded-full" style="width: 90%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm text-slate-400 mb-1"><span>Rendering & Shaders</span><span>8/10</span></div>
-                                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-blue-400 to-violet-500 rounded-full" style="width: 80%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm text-slate-400 mb-1"><span>Systems Engineering</span><span>9/10</span></div>
-                                <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full" style="width: 88%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="glass-panel rounded-3xl p-6 border border-white/5">
-                        <p class="text-sm uppercase tracking-[0.35em] text-slate-400 mb-4">Recent Highlights</p>
-                        <ul class="space-y-4 text-slate-200">
-                            <li class="flex items-start gap-3">
-                                <span class="text-teal-300 mt-1">▹</span>
-                                Led a digital twin deployment monitoring 120+ factory endpoints in real time.
+                <div class="space-y-4 sm:space-y-6 reveal">
+                    <div class="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-white/5">
+                        <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.35em] text-slate-400 mb-3 sm:mb-4">Recent Highlights</p>
+                        <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base text-slate-200">
+                            <li class="flex items-start gap-2 sm:gap-3">
+                                <span class="text-teal-300 mt-1 flex-shrink-0">▹</span>
+                                <span>Led a digital twin deployment monitoring 120+ factory endpoints in real time.</span>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="text-teal-300 mt-1">▹</span>
-                                Built a markerless AR demo for automotive visualization under 6 weeks.
+                            <li class="flex items-start gap-2 sm:gap-3">
+                                <span class="text-teal-300 mt-1 flex-shrink-0">▹</span>
+                                <span>Built a markerless AR demo for automotive visualization under 6 weeks.</span>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="text-teal-300 mt-1">▹</span>
-                                Shipped a HoloLens 2 experience with multimodal hand & voice interactions.
+                            <li class="flex items-start gap-2 sm:gap-3">
+                                <span class="text-teal-300 mt-1 flex-shrink-0">▹</span>
+                                <span>Shipped a HoloLens 2 experience with multimodal hand & voice interactions.</span>
                             </li>
                         </ul>
                     </div>
@@ -311,67 +496,67 @@
         </section>
 
         <!-- Focus Areas -->
-        <section class="py-16 md:py-20 px-5 md:px-10" id="focus">
-            <div class="max-w-6xl mx-auto space-y-12">
-                <div class="text-center reveal">
-                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">What I deliver</p>
-                    <h3 class="text-3xl md:text-4xl font-bold mt-4">High-impact immersive systems.</h3>
+        <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-5 md:px-10" id="focus">
+            <div class="max-w-6xl mx-auto space-y-8 sm:space-y-12">
+                <div class="text-center reveal px-2">
+                    <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400">What I deliver</p>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 sm:mt-4">High-impact immersive systems.</h3>
                 </div>
-                <div class="grid md:grid-cols-3 gap-6 reveal">
-                    <div class="glass-panel rounded-3xl p-6 border border-white/5 hover:-translate-y-1 transition-transform">
-                        <div class="text-3xl mb-4">🧠</div>
-                        <h4 class="text-xl font-semibold mb-3">Rapid Prototyping</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Proof-of-concept builds that validate ideas fast with clean architecture ready for scale.</p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 reveal">
+                    <div class="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-white/5 hover:-translate-y-1 active:scale-[0.98] transition-transform">
+                        <div class="text-2xl sm:text-3xl mb-3 sm:mb-4">🧠</div>
+                        <h4 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Rapid Prototyping</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Proof-of-concept builds that validate ideas fast with clean architecture ready for scale.</p>
                     </div>
-                    <div class="glass-panel rounded-3xl p-6 border border-white/5 hover:-translate-y-1 transition-transform">
-                        <div class="text-3xl mb-4">🎨</div>
-                        <h4 class="text-xl font-semibold mb-3">Interaction Design</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Human-centered mechanics, gesture systems, and tactile feedback that feel intuitive.</p>
+                    <div class="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-white/5 hover:-translate-y-1 active:scale-[0.98] transition-transform">
+                        <div class="text-2xl sm:text-3xl mb-3 sm:mb-4">🎨</div>
+                        <h4 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Interaction Design</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Human-centered mechanics, gesture systems, and tactile feedback that feel intuitive.</p>
                     </div>
-                    <div class="glass-panel rounded-3xl p-6 border border-white/5 hover:-translate-y-1 transition-transform">
-                        <div class="text-3xl mb-4">🚀</div>
-                        <h4 class="text-xl font-semibold mb-3">Production Shipping</h4>
-                        <p class="text-slate-300 text-sm leading-relaxed">Optimization, profiling, and release engineering across mobile, desktop, and MR headsets.</p>
+                    <div class="glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-white/5 hover:-translate-y-1 active:scale-[0.98] transition-transform sm:col-span-2 md:col-span-1">
+                        <div class="text-2xl sm:text-3xl mb-3 sm:mb-4">🚀</div>
+                        <h4 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Production Shipping</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Optimization, profiling, and release engineering across mobile, desktop, and MR headsets.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section (Dynamic Content) -->
-        <section class="py-20 md:py-24 px-5 md:px-10 relative" id="projects">
-            <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
-            <div class="max-w-7xl mx-auto space-y-12">
-                <div class="text-center reveal">
-                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">Selected Work</p>
-                    <h3 class="text-3xl md:text-4xl font-bold mt-4">Modular XR portfolio</h3>
-                    <p class="text-slate-300 mt-3 max-w-2xl mx-auto">Explore AR/VR, game, digital twin, and mixed reality builds. Drill down into each category and preview highlights, media, and narrative.</p>
+        <section class="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-5 md:px-10 relative" id="projects">
+            <div class="absolute inset-x-0 top-0 h-20 sm:h-40 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto space-y-8 sm:space-y-12">
+                <div class="text-center reveal px-2">
+                    <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400">Selected Work</p>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 sm:mt-4">Modular XR portfolio</h3>
+                    <p class="text-sm sm:text-base text-slate-300 mt-2 sm:mt-3 max-w-2xl mx-auto px-2">Explore AR/VR, game, digital twin, and mixed reality builds. Drill down into each category and preview highlights, media, and narrative.</p>
                 </div>
                 <!-- Container for dynamic content (Categories or Project List) -->
-                <div id="project-content" class="min-h-[500px] flex justify-center items-start w-full reveal">
-                    <p class="text-slate-400">Loading projects...</p>
+                <div id="project-content" class="min-h-[400px] sm:min-h-[500px] flex justify-center items-start w-full reveal">
+                    <p class="text-slate-400 text-sm sm:text-base">Loading projects...</p>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section class="py-20 md:py-24 px-5 md:px-10" id="contact">
+        <section class="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-5 md:px-10" id="contact">
             <div class="max-w-4xl mx-auto">
-                <div class="glass-panel rounded-3xl p-8 space-y-8 reveal">
-                    <p class="text-sm uppercase tracking-[0.4em] text-slate-400">Connect</p>
-                    <h3 class="text-3xl md:text-4xl font-bold">Let's build something immersive together.</h3>
-                    <p class="text-lg text-slate-300">I'm open to collaborations, consulting, or joining ambitious teams. Drop a line—I'll reply within 24 hours.</p>
-                    <div class="space-y-4">
-                        <a href="mailto:jeetvmistry@gmail.com" class="block w-full text-center text-lg font-semibold text-white bg-gradient-to-r from-teal-400 to-cyan-500 py-3 rounded-2xl hover:shadow-[0_20px_45px_rgba(6,182,212,0.3)] transition-shadow">
+                <div class="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-6 sm:space-y-8 reveal">
+                    <p class="text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em] text-slate-400">Connect</p>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold">Let's build something immersive together.</h3>
+                    <p class="text-base sm:text-lg text-slate-300">I'm open to collaborations, consulting, or joining ambitious teams. Drop a line—I'll reply within 24 hours.</p>
+                    <div class="space-y-3 sm:space-y-4">
+                        <a href="mailto:jeetvmistry@gmail.com" class="block w-full text-center text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-teal-400 to-cyan-500 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl hover:shadow-[0_20px_45px_rgba(6,182,212,0.3)] active:scale-[0.98] transition-all">
                         Email Me
                     </a>
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <a href="https://www.linkedin.com/in/jeet-mistry-495094153/" target="_blank" class="flex-1 border border-white/10 rounded-2xl py-3 text-center hover:border-white/30 transition-colors">LinkedIn</a>
-                            <a href="https://github.com/yourprofile" target="_blank" class="flex-1 border border-white/10 rounded-2xl py-3 text-center hover:border-white/30 transition-colors">GitHub</a>
+                            <a href="https://www.linkedin.com/in/jeet-mistry-495094153/" target="_blank" class="flex-1 border border-white/10 rounded-xl sm:rounded-2xl py-3 text-center hover:border-white/30 active:scale-[0.98] transition-all text-sm sm:text-base">LinkedIn</a>
+                            <a href="https://github.com/yourprofile" target="_blank" class="flex-1 border border-white/10 rounded-xl sm:rounded-2xl py-3 text-center hover:border-white/30 active:scale-[0.98] transition-all text-sm sm:text-base">GitHub</a>
                         </div>
-                        <a href="tel:+918511347110" class="inline-flex items-center gap-2 text-slate-200 hover:text-white transition-colors">
+                        <a href="tel:+918511347110" class="inline-flex items-center gap-2 text-sm sm:text-base text-slate-200 hover:text-white transition-colors py-2">
                             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                            +91 8511347110
-                        </a>
+                        +91 8511347110
+                    </a>
                     </div>
                     <!-- <div class="grid sm:grid-cols-3 gap-4 pt-4 border-t border-white/5 text-center">
                         <div class="rounded-2xl bg-white/5 p-4">
@@ -446,7 +631,7 @@
                         name: "Drone AR for visualisation", 
                         description: "Designed an AR visualization tool that overlays flight paths, telemetry data, and maintenance guides onto the live camera feed of a drone's environment.", 
                         media: [
-                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Drone+AR+Video+Coming+Soon" }
+                            { type: 'video', url: "Content/DroneAR/DroneAR - Made with Clipchamp.mp4" }
                         ],
                         link: "#" 
                     },
@@ -458,8 +643,8 @@
                 projects: [
                     { 
                         id: 6, 
-                        name: "VR Training Simulator", 
-                        description: "A high-fidelity VR simulator for industrial safety training, focusing on emergency protocols and equipment handling in a zero-risk environment (Unity/Oculus).", 
+                        name: "VR Educational Center: Khodiyar CAD Courses", 
+                        description: `VR Educational Center: Khodiyar CAD Courses<br><br><strong>Project Summary: The Virtual Learning Hub</strong><br>This project transforms the traditional course catalog and information center into a fully immersive VR experience for prospective and current students of Khodiyar CAD Center. Utilizing a custom-built virtual auditorium, the application allows users to naturally explore course details, placement records, and center information through intuitive VR interactions, enhancing engagement far beyond a standard website or brochure.<br><br><strong>Key Features & Technical Highlights</strong><br><strong>Native XR Interaction & Input:</strong> Implemented the Meta XR SDK to support dual interaction modes: precise Hand Tracking (hand gestures) and standard Controller Interaction, ensuring broad accessibility and a natural user experience.<br><br><strong>Intuitive Navigation System:</strong> Developed the OVRPlayer Camera Rig and custom scripting to enable seamless movement and primary interaction within the virtual environment.<br><br><strong>Dynamic Information Display (Curve UI):</strong> Designed and implemented Multiple Curve UI panels for aesthetic and functional display of content (like 'About Us,' 'Placement'). Scripted Horizontal Scroll Curve UI elements to neatly present large amounts of data, such as the full course catalog (e.g., AutoCAD, SolidWorks).<br><br><strong>Interactive Content Grouping:</strong> Utilized a Multiple Tab Group Scripting system to manage and switch between distinct informational categories (Mechanical, Civil, Graphics) cleanly, improving content organization.<br><br><strong>Environmental Fidelity & Immersion:</strong> Achieved high visual quality and performance through detailed Lighting and Environment Setup, including the use of Baked Area Lights to simulate realistic light distribution.<br><br><strong>Multimedia Integration:</strong> Seamlessly integrated Video Player functionality into the curved UI displays for engaging presentation of promotional or course-specific media.<br><br><strong>Spatial Audio Design:</strong> Enhanced immersion with context-sensitive audio, featuring a Welcome Surround Sound system and an Intro Sound for Details to provide clear, spatialized user feedback.`, 
                         media: [
                             { type: 'video', url: "videos/Room_VR.mp4" }
                         ],
@@ -467,10 +652,10 @@
                     },
                     { 
                         id: 7, 
-                        name: "VR Game Prototype (Unity)", 
-                        description: "Developed a combat-focused VR game prototype, demonstrating proficiency in physics interactions, locomotion, and complex C# game logic for immersive combat.", 
+                        name: "VR Real Estate Prototype", 
+                        description: `VR Real Estate Prototype<br><br><strong>Key Features and Technical Highlights</strong><br><strong>Comprehensive VR Locomotion Systems:</strong> Implementation of multiple user movement options, including smooth Locomotion for traditional navigation and Teleportation for comfortable, rapid traversal across large floor plans, demonstrating a focus on user comfort and accessibility.<br><br><strong>Dynamic Lighting & Environment Control:</strong> Implementation of a precise Light Toggle system, allowing users to switch room illumination on and off, demonstrating real-time lighting changes and environmental control.<br><br><strong>Advanced UI/UX Interaction:</strong> Simulated Television Interaction with Remote, including channel switching or menu navigation, showcasing complex object-to-object and UI-to-world communication.<br><br><strong>Physics-Based Object Manipulation:</strong> 3D Object Grabs and Interaction using VR controllers, demonstrating accurate inverse kinematics and physics calculations for object pickup, placement, and throwing.<br><br><strong>Real-Time Reflection Rendering:</strong> Integration of a performant Mirror Reflection system, adding significant visual fidelity and reinforcing the sense of presence in the virtual space.<br><br><strong>Utility & Power Interaction:</strong> Functional Socket Interactor system, allowing users to plug and unplug virtual devices, simulating real-world utility engagement.<br><br><strong>Integrated Time Simulation:</strong> Implementation of a Real-Time Clock visible within the environment, showcasing integration with system time or internal virtual time systems.<br><br><strong>Complex Physics Simulation:</strong> Demonstration of realistic projectile and impact dynamics using Cricket Ball Physics (or similar detailed sport/object physics) to test collision and restitution properties within the environment.`, 
                         media: [
-                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=VR+Game+Default" }
+                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=VR+Real+Estate+Prototype" }
                         ],
                         link: "#" 
                     },
@@ -482,10 +667,10 @@
                 projects: [
                     { 
                         id: 8, 
-                        name: "Mobile Puzzle Game", 
-                        description: "A casual 2D mobile puzzle game released on Android, focusing on optimizing performance and implementing user retention loops using Unity UI.", 
+                        name: "Zigzag Ascent: 3D Endless Runner Pro", 
+                        description: `Zigzag Ascent: 3D Endless Runner Prototype<br><br><strong>Project Summary: Precision-Based Infinite Runner</strong><br>A proof-of-concept 3D Endless Runner prototype focused on procedural generation and single-input control. The game challenges players to navigate an endlessly spawning zigzag path by mastering a precise, single-key turn mechanic, with the primary objective being crystal collection and high-score generation.<br><br><strong>Core Mechanics & Features</strong><br><strong>Procedural Level Generation:</strong> Developed a custom scripting system for the endless spawning of zigzag road segments, ensuring a unique, unpredictable experience on every run.<br><br><strong>Single-Input Precision Control:</strong> Implemented highly responsive Player Movement where the character's direction changes entirely via a single key press (Space), demanding perfect timing.<br><br><strong>Crystal Collection & Scoring:</strong> Integrated logic for dynamic Crystal Spawning and a clear Scoring System that tracks progress based on successful collections.<br><br><strong>Optimized Game Logic:</strong> Focused on scripting efficient, continuous mechanics for path advancement and object deletion (off-screen cleanup) to ensure smooth, high-speed gameplay performance.`, 
                         media: [
-                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Mobile+Game+Default" }
+                            { type: 'video', url: "Content/Game/3d_endlessRunner.mp4" }
                         ],
                         link: "#" 
                     },
@@ -509,7 +694,7 @@
                         name: "Factory Floor Monitoring DT", 
                         description: "Created a real-time digital twin of a factory floor for remote monitoring of machinery health and production efficiency using IoT data integration and Unity 3D.", 
                         media: [
-                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=Digital+Twin+Video+Coming+Soon" }
+                            { type: 'video', url: "Content/DigitalTwin/DigitalTwin_Compressed.mp4" }
                         ],
                         link: "#" 
                     },
@@ -522,9 +707,9 @@
                     { 
                         id: 11, 
                         name: "Interactive Mixed Reality Experience", 
-                        description: "Developed a high-fidelity Mixed Reality experience for HoloLens 2 using Unity 2020.3.28f1 and the Microsoft Mixed Reality Toolkit (MRTK) via the OpenXR Plugin. The application features a fully immersive environment utilizing Spatial Mapping to anchor holograms to the real world. I implemented a multimodal interaction system including precise Hand Tracking (NearInteractionGrabbable, ObjectManipulator) for grabbing/manipulating 3D assets, and a SpeechInputHandler for hands-free Voice Commands (e.g., 'Toggle Lights', 'Explode Model') to trigger complex animations. The project was built for UWP (ARM64) and optimized using Holographic Remoting for rapid iteration.", 
+                        description: `Mixed Reality (MR) HoloLens 2 Application<br><br><strong>Project Summary: High-Fidelity MR for Industrial Visualization</strong><br>This project represents a high-fidelity Mixed Reality application designed specifically for the HoloLens 2, blending virtual models seamlessly into the user's real-world environment. Utilizing the full capabilities of Spatial Computing, the application provides a hands-on, intuitive way to interact with complex 3D data. The core focus was developing a robust, multimodal interaction system that allows users to seamlessly control holograms using both precise hand gestures and efficient, hands-free voice commands.<br><br><strong>Key Features & Technical Highlights</strong><br><strong>Platform & SDK Integration:</strong> Developed using Unity (2020.3.28f1) and the Microsoft Mixed Reality Toolkit (MRTK) via the modern OpenXR Plugin for optimal performance and cross-platform readiness on the HoloLens 2.<br><br><strong>Real-World Integration (Spatial Mapping):</strong> Implemented Spatial Mapping to accurately recognize and map the physical environment, allowing holograms to be anchored and interact realistically with floors, walls, and real-world surfaces.<br><br><strong>Multimodal Interaction System (Hand & Voice):</strong> Precise Hand Tracking: Utilized MRTK components like NearInteractionGrabbable and ObjectManipulator to enable users to physically grab, scale, rotate, and manipulate 3D assets with intuitive hand gestures. Hands-Free Voice Commands: Integrated the SpeechInputHandler to execute complex actions (e.g., 'Toggle Lights', 'Explode Model') via voice, streamlining workflows and providing a critical hands-free control option.<br><br><strong>Complex Feature Triggering:</strong> Designed and scripted the voice command system to specifically trigger complex animations within the 3D models (e.g., an exploded view of a machine), demonstrating advanced data visualization capabilities.<br><br><strong>Deployment & Optimization:</strong> Built the final application for UWP (ARM64) deployment. Workflow was streamlined using Holographic Remoting for rapid testing, iteration, and debugging directly from the Unity Editor to the HoloLens device.`, 
                         media: [
-                            { type: 'image', url: "https://placehold.co/800x450/1e293b/e2e8f0?text=HoloLens+Video+Coming+Soon" }
+                            { type: 'video', url: "Content/MixedReality/MixedReality_HoloLens.mp4" }
                         ],
                         link: "#" 
                     },
@@ -539,15 +724,15 @@
          */
         function renderCategoryMenu() {
             let html = `
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full max-w-6xl">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 w-full max-w-6xl px-2 sm:px-0">
             `;
 
             Object.keys(projectData).forEach(key => {
                 const category = projectData[key];
                 html += `
-                    <button class="project-card-link bg-slate-800 hover:bg-slate-700 transition-all duration-300 rounded-xl shadow-xl p-6 flex flex-col items-center text-center focus:outline-none focus:ring-4 focus:ring-teal-500/50" onclick="renderProjectDetails('${key}')">
-                        <span class="project-icon text-5xl mb-3 transition-transform duration-300">${category.icon}</span>
-                        <h4 class="text-xl font-semibold text-white">${category.title}</h4>
+                    <button class="project-card-link bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-300 rounded-lg sm:rounded-xl shadow-xl p-4 sm:p-6 flex flex-col items-center text-center focus:outline-none focus:ring-4 focus:ring-teal-500/50 min-h-[120px] sm:min-h-[140px]" onclick="renderProjectDetails('${key}')">
+                        <span class="project-icon text-4xl sm:text-5xl mb-2 sm:mb-3 transition-transform duration-300">${category.icon}</span>
+                        <h4 class="text-sm sm:text-base md:text-xl font-semibold text-white leading-tight">${category.title}</h4>
                     </button>
                 `;
             });
@@ -569,20 +754,20 @@
             }
 
             let html = `
-                <div class="w-full max-w-5xl">
-                    <button onclick="renderCategoryMenu()" class="text-teal-400 hover:text-teal-300 mb-8 flex items-center transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <div class="w-full max-w-5xl px-2 sm:px-0">
+                    <button onclick="renderCategoryMenu()" class="text-teal-400 hover:text-teal-300 active:text-teal-200 mb-6 sm:mb-8 flex items-center transition-colors text-sm sm:text-base py-2">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back to Categories
                     </button>
-                    <h4 class="text-3xl font-bold text-white mb-10 border-b border-teal-500 pb-3">${category.title}</h4>
-                    <div class="grid md:grid-cols-2 gap-6">
+                    <h4 class="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-10 border-b border-teal-500 pb-2 sm:pb-3">${category.title}</h4>
+                    <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
             `;
 
             category.projects.forEach(project => {
                 html += `
-                    <button onclick="renderSingleProject('${categoryKey}', ${project.id})" class="text-left bg-slate-800 hover:bg-slate-700 transition-all duration-300 rounded-xl shadow-xl p-6 focus:outline-none focus:ring-4 focus:ring-teal-500/50 h-full flex flex-col">
-                        <h5 class="text-xl font-semibold text-teal-400 mb-2">${project.name}</h5>
-                        <p class="text-sm text-slate-400 flex-grow">${project.description.substring(0, 150).trim()}...</p>
+                    <button onclick="renderSingleProject('${categoryKey}', ${project.id})" class="text-left bg-slate-800 hover:bg-slate-700 active:scale-[0.98] transition-all duration-300 rounded-lg sm:rounded-xl shadow-xl p-4 sm:p-6 focus:outline-none focus:ring-4 focus:ring-teal-500/50 h-full flex flex-col">
+                        <h5 class="text-lg sm:text-xl font-semibold text-teal-400 mb-2">${project.name}</h5>
+                        <p class="text-xs sm:text-sm text-slate-400 flex-grow leading-relaxed">${project.description.substring(0, 120).trim()}...</p>
                         <p class="text-xs mt-3 text-slate-500 self-end">View Media and Description →</p>
                     </button>
                 `;
@@ -610,12 +795,12 @@
 
             let mediaGallery = '';
             if (project.media && project.media.length > 0) {
-                mediaGallery += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                mediaGallery += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">`;
                 project.media.forEach(mediaItem => {
                     if (mediaItem.type === 'image') {
                         mediaGallery += `
                             <div class="media-frame">
-                                <img src="${mediaItem.url}" alt="Visual for ${project.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x250/374151/f9fafb?text=Visual+Unavailable';" />
+                                <img src="${mediaItem.url}" alt="Visual for ${project.name}" class="w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x250/374151/f9fafb?text=Visual+Unavailable';" />
                             </div>
                         `;
                     } else if (mediaItem.type === 'video') {
@@ -623,7 +808,7 @@
                         const forceAttr = mediaItem.forceLandscape ? 'data-force="landscape"' : '';
                         mediaGallery += `
                             <div class="media-frame">
-                                <video src="${mediaItem.url}" controls autoplay loop muted playsinline preload="metadata" class="project-video ${landscapeClass}" ${forceAttr}>
+                                <video src="${mediaItem.url}" controls autoplay loop muted playsinline preload="metadata" class="project-video ${landscapeClass}" ${forceAttr} style="max-width: 100%; height: auto;">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -632,29 +817,29 @@
                 });
                 mediaGallery += `</div>`;
             } else {
-                mediaGallery = `<div class="min-h-[200px] bg-slate-700/50 rounded-lg flex items-center justify-center p-4 text-slate-400">No media available for this project.</div>`;
+                mediaGallery = `<div class="min-h-[150px] sm:min-h-[200px] bg-slate-700/50 rounded-lg flex items-center justify-center p-4 text-sm sm:text-base text-slate-400">No media available for this project.</div>`;
             }
 
             let html = `
-                <div class="w-full max-w-5xl">
-                    <button onclick="renderProjectDetails('${categoryKey}')" class="text-teal-400 hover:text-teal-300 mb-8 flex items-center transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <div class="w-full max-w-5xl px-2 sm:px-0">
+                    <button onclick="renderProjectDetails('${categoryKey}')" class="text-teal-400 hover:text-teal-300 active:text-teal-200 mb-6 sm:mb-8 flex items-center transition-colors text-sm sm:text-base py-2">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back to ${category.title} Projects
                     </button>
                     
-                    <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8 space-y-8">
-                        <h4 class="text-3xl font-bold text-teal-400 border-b border-slate-700 pb-4">${project.name}</h4>
+                    <div class="bg-slate-800 rounded-lg sm:rounded-xl shadow-2xl p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
+                        <h4 class="text-2xl sm:text-3xl font-bold text-teal-400 border-b border-slate-700 pb-3 sm:pb-4">${project.name}</h4>
                         
                         <!-- Media Gallery Section -->
                         <div>
-                            <h5 class="text-xl font-semibold text-white mb-3">Project Media</h5>
+                            <h5 class="text-lg sm:text-xl font-semibold text-white mb-3">Project Media</h5>
                             ${mediaGallery}
                         </div>
 
                         <!-- Description Section -->
                         <div>
-                            <h5 class="text-xl font-semibold text-white mb-3">Project Description</h5>
-                            <p class="text-base text-slate-300 leading-relaxed">${project.description}</p>
+                            <h5 class="text-lg sm:text-xl font-semibold text-white mb-3">Project Description</h5>
+                            <div class="text-sm sm:text-base text-slate-300 leading-relaxed prose prose-invert max-w-none">${project.description}</div>
                         </div>
                     </div>
                 </div>
@@ -725,6 +910,32 @@
                 }
             });
         }
+
+        /**
+         * Mobile menu toggle functions
+         */
+        function toggleMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            if (menu) {
+                menu.classList.toggle('mobile-open');
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            if (menu) {
+                menu.classList.remove('mobile-open');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const menu = document.getElementById('nav-menu');
+            if (nav && menu && !nav.contains(e.target) && menu.classList.contains('mobile-open')) {
+                closeMobileMenu();
+            }
+        });
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {

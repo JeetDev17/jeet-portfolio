@@ -1,0 +1,12 @@
+Zigzag Ascent: 3D Endless Runner Prototype
+Project Summary: Precision-Based Infinite Runner
+A proof-of-concept 3D Endless Runner prototype focused on procedural generation and single-input control. The game challenges players to navigate an endlessly spawning zigzag path by mastering a precise, single-key turn mechanic, with the primary objective being crystal collection and high-score generation.
+
+Core Mechanics & Features
+Procedural Level Generation: Developed a custom scripting system for the endless spawning of zigzag road segments, ensuring a unique, unpredictable experience on every run.
+
+Single-Input Precision Control: Implemented highly responsive Player Movement where the character's direction changes entirely via a single key press (Space), demanding perfect timing.
+
+Crystal Collection & Scoring: Integrated logic for dynamic Crystal Spawning and a clear Scoring System that tracks progress based on successful collections.
+
+Optimized Game Logic: Focused on scripting efficient, continuous mechanics for path advancement and object deletion (off-screen cleanup) to ensure smooth, high-speed gameplay performance.

@@ -1,0 +1,22 @@
+VR Educational Center: Khodiyar CAD Courses
+Project Summary: The Virtual Learning Hub
+This project transforms the traditional course catalog and information center into a fully immersive VR experience for prospective and current students of Khodiyar CAD Center. Utilizing a custom-built virtual auditorium, the application allows users to naturally explore course details, placement records, and center information through intuitive VR interactions, enhancing engagement far beyond a standard website or brochure.
+
+Key Features & Technical Highlights
+Native XR Interaction & Input: Implemented the Meta XR SDK to support dual interaction modes: precise Hand Tracking (hand gestures) and standard Controller Interaction, ensuring broad accessibility and a natural user experience.
+
+Intuitive Navigation System: Developed the OVRPlayer Camera Rig and custom scripting to enable seamless movement and primary interaction within the virtual environment.
+
+Dynamic Information Display (Curve UI):
+
+Designed and implemented Multiple Curve UI panels for aesthetic and functional display of content (like 'About Us,' 'Placement').
+
+Scripted Horizontal Scroll Curve UI elements to neatly present large amounts of data, such as the full course catalog (e.g., AutoCAD, SolidWorks).
+
+Interactive Content Grouping: Utilized a Multiple Tab Group Scripting system to manage and switch between distinct informational categories (Mechanical, Civil, Graphics) cleanly, improving content organization.
+
+Environmental Fidelity & Immersion: Achieved high visual quality and performance through detailed Lighting and Environment Setup, including the use of Baked Area Lights to simulate realistic light distribution.
+
+Multimedia Integration: Seamlessly integrated Video Player functionality into the curved UI displays for engaging presentation of promotional or course-specific media.
+
+Spatial Audio Design: Enhanced immersion with context-sensitive audio, featuring a Welcome Surround Sound system and an Intro Sound for Details to provide clear, spatialized user feedback.
